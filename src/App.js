@@ -7,7 +7,7 @@ class App extends Component {
      
     return (
       <div className="App">
-        <Navbar title="Github finder" icon='fab fa-github'/>
+        <Navbar />
       </div>
     );
 

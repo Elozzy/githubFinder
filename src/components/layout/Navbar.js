@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 
 class Navbar extends Component {
+
+    //passes the props to the navbar
+    static defaultProps = {
+        title: 'Github Finder',
+        icon: 'fab fa-github'
+    };
+
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+        icon: PropTypes.string.isRequired
+    }
   render() {
     return (
     
@@ -13,4 +25,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar
+export default Navbar;
