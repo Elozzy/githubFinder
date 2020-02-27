@@ -1,44 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export class Search extends Component {
 
-    state = {
-        text: ''
-    };
+const  Search = ({ searchUsers, showClear, clearUsers, setAlert}) => {
 
-    static propTypes = {
-        searchUsers: PropTypes.func.isRequired,
-        clearUsers: PropTypes.func.isRequired,
-        showClear: PropTypes.bool.isRequired,
+    const [text, setText] = useState('');
 
-    }
 
-    onChange = (e) => this.setState({ [e.target.name]: e.target.value }); 
+  const  onChange = (e) => setText(e.target.value); 
 
-    onSubmit = e => {
+  const  onSubmit = e => {
         e.preventDefault();
-        if (this.state.text === ''){
-            this.props.setAlert('please enter something', 'light')
+        if (text === ''){
+            setAlert('please enter something', 'light')
         }else{
-            this.props.searchUsers(this.state.text);
-            this.setState({ text: '' });
+            searchUsers(text);
+            setText('');
 
         }
        
     };
 
-    render() {
-        const {showClear, clearUsers } = this.props;
+
         return (
             <div>
-                <form onSubmit={this.onSubmit} className="form">
+                <form onSubmit={onSubmit} className="form">
                     <input 
                     type="text" 
                     name="text" 
                     placeholder="Search Users..."  
-                    value={this.state.text}  
-                    onChange={this.onChange} 
+                    value={ text }  
+                    onChange={ onChange } 
                     />
 
                     
@@ -55,7 +47,14 @@ export class Search extends Component {
                 
             </div>
         );
-    }
+    
 }
 
-export default Search
+Search.propTypes = {
+    searchUsers: PropTypes.func.isRequired,
+    clearUsers: PropTypes.func.isRequired,
+    showClear: PropTypes.bool.isRequired,
+   
+};
+
+export default Search;
